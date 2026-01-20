@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Project.Services;
 
 namespace Project
 {
@@ -19,6 +20,13 @@ namespace Project
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void email_click(object sender, RoutedEventArgs e)
+        {
+            Email emailUser = new Email();
+            emailUser.Show();
+
         }
     }
 }

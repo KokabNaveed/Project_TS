@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Project.Models;
 
 namespace Project.Services
 {
@@ -81,7 +71,7 @@ namespace Project.Services
 
             using (var db = new AppDbContext())
             {
-                bool emailExists = db.EmailUser.Any(x => x.EmailAddress == email);
+                bool emailExists = db.EmailUsers.Any(x => x.EmailAddress == email);
                 if (emailExists)
                 {
                     MessageBox.Show(
@@ -102,7 +92,7 @@ namespace Project.Services
                     StorageGB = storageGb
                 };
 
-                db.EmailUser.Add(emailEntity);
+                db.EmailUsers.Add(emailEntity);
                 db.SaveChanges();
             }
 

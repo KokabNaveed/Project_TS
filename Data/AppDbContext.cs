@@ -6,9 +6,9 @@ public class AppDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         options.UseMySql(
-            "server=localhost;database=Subscriptionsystem;user=root;password=;",
+            "server=localhost;database=subscriptionsystem;user=root;password=;",
             ServerVersion.AutoDetect(
-                "server=localhost;database=Subscriptionsystem;user=root;password=;"
+                "server=localhost;database=subscriptionsystem;user=root;password=;"
             )
         );
     }

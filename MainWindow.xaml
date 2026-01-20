@@ -24,8 +24,8 @@
 
             <MenuItem Header="Domain" Click="DomainMenu_Click"></MenuItem>
 
-            <!--<MenuItem Header="Software" Click="SoftwareMenu_Click"></MenuItem>
-            <MenuItem Header="Exit" Click="exit_Click"></MenuItem>-->
+            <MenuItem Header="Software" Click="SoftwareMenu_Click"></MenuItem>
+            <MenuItem Header="Exit" Click="exit_Click"></MenuItem>
 
         </Menu>
         <DataGrid x:Name="dataGrid"

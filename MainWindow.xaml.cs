@@ -27,5 +27,18 @@ namespace Project
             domainUser.Show();
             this.Close();
         }
+
+        private void SoftwareMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Software softwareUser = new Software();
+            softwareUser.Show();
+            this.Close();
+        }
+
+        private void exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

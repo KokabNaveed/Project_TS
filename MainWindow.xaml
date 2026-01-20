@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Click="email_click" Content="Email User" Name="emailButton"></Button>
-    </Grid>
+               Title="Subscription System" 
+        Height="500" Width="800" 
+        WindowStartupLocation="CenterScreen">
+
+    <DockPanel LastChildFill="True">
+        <Label HorizontalContentAlignment="Center" Name="welcome" Content="Welcome To Subscription System" Background="Black" Foreground="White"   DockPanel.Dock="Top" ></Label>
+        <Menu DockPanel.Dock="Top">
+            <!--<MenuItem Header="Services">
+                <MenuItem Header="Email" Click="EmailData_Click"></MenuItem>
+
+                <MenuItem Header="Domain" Click="DomainData_Click"></MenuItem>
+
+                <MenuItem Header="Software" Click="SoftwareData_Click"></MenuItem>
+
+            </MenuItem>-->
+            <MenuItem Header="Email" Click="EmailMenu_Click"></MenuItem>
+
+            <MenuItem Header="Domain" Click="DomainMenu_Click"></MenuItem>
+
+            <!--<MenuItem Header="Software" Click="SoftwareMenu_Click"></MenuItem>
+            <MenuItem Header="Exit" Click="exit_Click"></MenuItem>-->
+
+        </Menu>
+        <DataGrid x:Name="dataGrid"
+          DockPanel.Dock="Bottom"
+          AutoGenerateColumns="True"
+          IsReadOnly="True"
+          Margin="10"
+          Visibility="Collapsed"/>
+    </DockPanel>
 </Window>

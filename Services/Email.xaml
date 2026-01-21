@@ -8,21 +8,35 @@
         Background="#F3F4F6">
     <Window.Resources>
 
-        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+        <Style x:Key="ElegantButtonStyle" TargetType="Button">
             <Setter Property="Height" Value="44"/>
-            <Setter Property="Background" Value="#4F46E5"/>
-            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#4F46E5"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
 
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="8">
+                            CornerRadius="10"
+                            Background="{TemplateBinding Background}">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                BlurRadius="0"
+                                ShadowDepth="0"
+                                Opacity="0"/>
+                            </Border.Effect>
+
                             <ContentPresenter
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
@@ -32,23 +46,74 @@
 
                             <!-- Hover -->
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border"
-                                    Property="Background"
-                                    Value="#4338CA"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+
+                                            <!-- Scale -->
+                                            <DoubleAnimation
+                                            Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                            To="1.04"
+                                            Duration="0:0:0.15"/>
+                                            <DoubleAnimation
+                                            Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                            To="1.04"
+                                            Duration="0:0:0.15"/>
+
+                                            <!-- Shadow -->
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)"
+                                            To="18"
+                                            Duration="0:0:0.15"/>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
+                                            To="0.35"
+                                            Duration="0:0:0.15"/>
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+
+                                            <!-- Reset scale -->
+                                            <DoubleAnimation
+                                            Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                            To="1"
+                                            Duration="0:0:0.15"/>
+                                            <DoubleAnimation
+                                            Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                            To="1"
+                                            Duration="0:0:0.15"/>
+
+                                            <!-- Remove shadow -->
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)"
+                                            To="0"
+                                            Duration="0:0:0.15"/>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
+                                            To="0"
+                                            Duration="0:0:0.15"/>
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
 
                             <!-- Pressed -->
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border"
-                                    Property="Background"
-                                    Value="#3730A3"/>
-                            </Trigger>
-
-                            <!-- Disabled -->
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border"
-                                    Property="Opacity"
-                                    Value="0.6"/>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
 
                         </ControlTemplate.Triggers>
@@ -58,6 +123,7 @@
         </Style>
 
     </Window.Resources>
+
 
     <Grid>
         <Border Width="650"
@@ -152,9 +218,10 @@
                 <!-- Submit -->
                 <Button Grid.Row="2"
         Content="Create User"
-        Style="{StaticResource PrimaryButtonStyle}"
+        Style="{StaticResource ElegantButtonStyle}"
         Margin="0,15,0,0"
         Click="Submit_Click"/>
+
 
             </Grid>
         </Border>

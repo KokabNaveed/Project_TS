@@ -6,16 +6,134 @@
         xmlns:local="clr-namespace:Project.Services"
         mc:Ignorable="d"
                Title="Software" 
-        Height="500"
-        Width="850"
-        WindowStartupLocation="CenterScreen">
+            Height="600"
+    Width="800"
+    WindowStartupLocation="CenterScreen"
+    Background="#F3F4F6">
+    <Window.Resources>
+
+        <Style x:Key="ElegantButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#4F46E5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                        CornerRadius="10"
+                        Background="{TemplateBinding Background}">
+                            <Border.Effect>
+                                <DropShadowEffect
+                            BlurRadius="0"
+                            ShadowDepth="0"
+                            Opacity="0"/>
+                            </Border.Effect>
+
+                            <ContentPresenter
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+
+                                            <!-- Scale -->
+                                            <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                        To="1.04"
+                                        Duration="0:0:0.15"/>
+                                            <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                        To="1.04"
+                                        Duration="0:0:0.15"/>
+
+                                            <!-- Shadow -->
+                                            <DoubleAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)"
+                                        To="18"
+                                        Duration="0:0:0.15"/>
+                                            <DoubleAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
+                                        To="0.35"
+                                        Duration="0:0:0.15"/>
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+
+                                            <!-- Reset scale -->
+                                            <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                        To="1"
+                                        Duration="0:0:0.15"/>
+                                            <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                        To="1"
+                                        Duration="0:0:0.15"/>
+
+                                            <!-- Remove shadow -->
+                                            <DoubleAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)"
+                                        To="0"
+                                        Duration="0:0:0.15"/>
+                                            <DoubleAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
+                                        To="0"
+                                        Duration="0:0:0.15"/>
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <!-- Pressed -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
     <Grid>
-        <Border Width="620"
-             Padding="25"
-             CornerRadius="14"
-             Background="White"
-             VerticalAlignment="Center"
-             HorizontalAlignment="Center">
+        <Border Width="650"
+                Padding="30"
+                CornerRadius="16"
+                Background="White"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
 
             <Grid>
                 <!-- Columns -->
@@ -52,15 +170,15 @@
                 <!-- LEFT COLUMN -->
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
                     <TextBlock Text="Software Name" FontSize="12"/>
-                    <TextBox x:Name="txtSoftwareName" Height="38" Margin="0,6,0,14" Padding="10" PreviewTextInput="OnlyLetters"/>
+                    <TextBox x:Name="txtSoftwareName" Height="40" Margin="0,6,0,14" Padding="10" ToolTip="Enter Software Name" PreviewTextInput="OnlyLetters"/>
 
                     <TextBlock Text="Plan Type" FontSize="12"/>
                     <ComboBox x:Name="cmbPlan"
-          Height="38"
+          Height="40"
           Margin="0,6,0,14"
           IsEditable="False"
           SelectedIndex="0"
-          SelectionChanged="cmbPlan_SelectionChanged">
+          SelectionChanged="cmbPlan_SelectionChanged" ToolTip="Select Plan Type">
 
                         <ComboBoxItem Content="Select Plan" IsEnabled="False"/>
                         <ComboBoxItem Content="Free"/>
@@ -71,10 +189,10 @@
 
 
                     <TextBlock Text="Email Subscribed With" FontSize="12"/>
-                    <TextBox x:Name="txtemail" Height="38" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtemail" Height="40" ToolTip="Enter Email" Margin="0,6,0,14" Padding="10"/>
 
                     <TextBlock Text="Renewal Date" FontSize="12"/>
-                    <DatePicker x:Name="dpRenewalDate" Height="38" Margin="0,6,0,14" SelectedDateFormat="Short"/>
+                    <DatePicker x:Name="dpRenewalDate" Height="40" ToolTip="Select Renewal Date" Margin="0,6,0,14" SelectedDateFormat="Short"/>
 
 
                 </StackPanel>
@@ -83,10 +201,10 @@
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
                     <TextBlock Text="Category" FontSize="12"/>
                     <ComboBox x:Name="cmbCategory"
-          Height="38"
+          Height="40"
           Margin="0,6,0,14"
           IsEditable="False"
-          SelectedIndex="0">
+          SelectedIndex="0" ToolTip="Select Category">
 
                         <ComboBoxItem Content="Select Category" IsEnabled="False"/>
                         <ComboBoxItem Content="Software"/>
@@ -95,21 +213,18 @@
                     </ComboBox>
 
                     <TextBlock Text="Amount($)" FontSize="12"/>
-                    <TextBox x:Name="txtamount" Height="38" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtamount" Height="40" Margin="0,6,0,14" Padding="10"/>
 
                     <TextBlock Text="Subscribed Date" FontSize="12"/>
-                    <DatePicker x:Name="dpSubscribeddate" Height="38" Margin="0,6,0,14" SelectedDateFormat="Short"/>
+                    <DatePicker x:Name="dpSubscribeddate" Height="40" ToolTip="Select Subscribed Date" Margin="0,6,0,14" SelectedDateFormat="Short"/>
                 </StackPanel>
 
                 <!-- SUBMIT BUTTON -->
                 <Button Grid.Row="5"
                      Grid.ColumnSpan="2"
+                     Margin="0,15,0,0"
                      Content="SUBMIT"
-                     Height="42"
-                     Margin="0,10,0,0"
-                     Background="#4F46E5"
-                     Foreground="White"
-                     FontWeight="SemiBold"
+                     Style="{StaticResource ElegantButtonStyle}"
                      Cursor="Hand"
                      Click="Submit_Click"/>
             </Grid>

@@ -15,6 +15,14 @@ namespace Project.Services
             InitializeComponent();
         }
 
+        private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordPlaceholder.Visibility = string.IsNullOrEmpty(TxtPassword.Password)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+
+
         private void OnlyLetters(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !Regex.IsMatch(e.Text, @"^[A-Za-z]+$");
@@ -26,7 +34,7 @@ namespace Project.Services
             string lastName = txtLName.Text.Trim();
             string email = txtEmail.Text.Trim();
             string company = txtcompany.Text.Trim();
-            string password = txtpassword.Password.Trim();
+            string password = TxtPassword.Password.Trim();
 
             if (string.IsNullOrWhiteSpace(firstName) ||
                     string.IsNullOrWhiteSpace(lastName) ||

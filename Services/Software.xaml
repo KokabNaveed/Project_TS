@@ -126,6 +126,124 @@
             </Setter>
         </Style>
 
+        <!-- TextBox Placeholder Style -->
+        <Style x:Key="PlaceholderTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Background="{TemplateBinding Background}"/>
+
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                  Margin="8,0,0,0"/>
+
+                            <!-- Placeholder -->
+                            <TextBlock Text="{TemplateBinding Tag}"
+                               Foreground="#9CA3AF"
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"
+                               Visibility="Collapsed"
+                               x:Name="Placeholder"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="Placeholder"
+                                Property="Visibility"
+                                Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernDatePickerStyle" TargetType="DatePicker">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DatePicker">
+                        <Border CornerRadius="8"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="40"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Text area -->
+                                <DatePickerTextBox
+                            x:Name="PART_TextBox"
+                            Grid.Column="0"
+                            Padding="10"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            VerticalContentAlignment="Center"/>
+
+                                <!-- Calendar button -->
+                                <Button Grid.Column="1"
+                                x:Name="PART_Button"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Content="📅"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="Background" Value="#F9FAFB"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"/>
+
+                            <ContentPresenter Margin="10,0,30,0"
+                                      VerticalAlignment="Center"
+                                      Content="{TemplateBinding SelectionBoxItem}"/>
+
+                            <!-- Arrow -->
+                            <Path Data="M 0 0 L 4 4 L 8 0"
+                          Stroke="Gray"
+                          StrokeThickness="2"
+                          HorizontalAlignment="Right"
+                          Margin="0,0,12,0"
+                          VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Border Width="650"
@@ -170,7 +288,7 @@
                 <!-- LEFT COLUMN -->
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
                     <TextBlock Text="Software Name" FontSize="12"/>
-                    <TextBox x:Name="txtSoftwareName" Height="40" Margin="0,6,0,14" Padding="10" ToolTip="Enter Software Name" PreviewTextInput="OnlyLetters"/>
+                    <TextBox x:Name="txtSoftwareName" Height="40" Margin="0,6,0,14" Padding="10" ToolTip="Enter Software Name" PreviewTextInput="OnlyLetters" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. Microsoft Office"/>
 
                     <TextBlock Text="Plan Type" FontSize="12"/>
                     <ComboBox x:Name="cmbPlan"
@@ -178,7 +296,7 @@
           Margin="0,6,0,14"
           IsEditable="False"
           SelectedIndex="0"
-          SelectionChanged="cmbPlan_SelectionChanged" ToolTip="Select Plan Type">
+          SelectionChanged="cmbPlan_SelectionChanged" ToolTip="Select Plan Type" Style="{StaticResource ModernComboBoxStyle}">
 
                         <ComboBoxItem Content="Select Plan" IsEnabled="False"/>
                         <ComboBoxItem Content="Free"/>
@@ -189,10 +307,10 @@
 
 
                     <TextBlock Text="Email Subscribed With" FontSize="12"/>
-                    <TextBox x:Name="txtemail" Height="40" ToolTip="Enter Email" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtemail" Height="40" ToolTip="Enter Email" Margin="0,6,0,14" Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. user@example.com"/>
 
                     <TextBlock Text="Renewal Date" FontSize="12"/>
-                    <DatePicker x:Name="dpRenewalDate" Height="40" ToolTip="Select Renewal Date" Margin="0,6,0,14" SelectedDateFormat="Short"/>
+                    <DatePicker x:Name="dpRenewalDate" Height="40" ToolTip="Select Renewal Date" Margin="0,6,0,14" SelectedDateFormat="Short" Style="{StaticResource ModernDatePickerStyle}"/>
 
 
                 </StackPanel>
@@ -204,7 +322,8 @@
           Height="40"
           Margin="0,6,0,14"
           IsEditable="False"
-          SelectedIndex="0" ToolTip="Select Category">
+          SelectedIndex="0" ToolTip="Select Category" Style="{StaticResource ModernComboBoxStyle}"
+>
 
                         <ComboBoxItem Content="Select Category" IsEnabled="False"/>
                         <ComboBoxItem Content="Software"/>
@@ -213,10 +332,10 @@
                     </ComboBox>
 
                     <TextBlock Text="Amount($)" FontSize="12"/>
-                    <TextBox x:Name="txtamount" Height="40" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtamount" Height="40" Margin="0,6,0,14" Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Amount in USD"/>
 
                     <TextBlock Text="Subscribed Date" FontSize="12"/>
-                    <DatePicker x:Name="dpSubscribeddate" Height="40" ToolTip="Select Subscribed Date" Margin="0,6,0,14" SelectedDateFormat="Short"/>
+                    <DatePicker x:Name="dpSubscribeddate" Height="40" ToolTip="Select Subscribed Date" Margin="0,6,0,14" SelectedDateFormat="Short" Style="{StaticResource ModernDatePickerStyle}"/>
                 </StackPanel>
 
                 <!-- SUBMIT BUTTON -->

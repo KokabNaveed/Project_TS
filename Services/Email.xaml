@@ -6,6 +6,7 @@
         Width="800"
         WindowStartupLocation="CenterScreen"
         Background="#F3F4F6">
+
     <Window.Resources>
 
         <Style x:Key="ElegantButtonStyle" TargetType="Button">
@@ -122,6 +123,48 @@
             </Setter>
         </Style>
 
+        <!-- TextBox Placeholder Style -->
+        <Style x:Key="PlaceholderTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Background="{TemplateBinding Background}"/>
+
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                  Margin="8,0,0,0"/>
+
+                            <!-- Placeholder -->
+                            <TextBlock Text="{TemplateBinding Tag}"
+                               Foreground="#9CA3AF"
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"
+                               Visibility="Collapsed"
+                               x:Name="Placeholder"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="Placeholder"
+                                Property="Visibility"
+                                Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
 
 
@@ -170,21 +213,21 @@
                                  Margin="0,6,0,16"
                                  Padding="10"
                                  ToolTip="Enter First Name"
-                                 PreviewTextInput="OnlyLetters"/>
+                                 PreviewTextInput="OnlyLetters" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Patrik"/>
 
                         <TextBlock Text="Email Address"/>
                         <TextBox x:Name="txtEmail"
                                  Height="40"
                                  Margin="0,6,0,16"
                                  ToolTip="Enter Email"
-                                 Padding="10"/>
+                                 Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. user@example.com"/>
 
                         <TextBlock Text="Storage (GB)"/>
                         <TextBox x:Name="txtStorage"
                                  Height="40"
                                  Margin="0,6,0,16"
                                  Padding="10"
-                                 ToolTip="Enter Storage"/>
+                                 ToolTip="Enter Storage" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Storage in GB"/>
                     </StackPanel>
 
                     <!-- RIGHT -->
@@ -196,7 +239,7 @@
                                  Margin="0,6,0,16"
                                  Padding="10"
                                  ToolTip="Enter Last Name"
-                                 PreviewTextInput="OnlyLetters"/>
+                                 PreviewTextInput="OnlyLetters" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Jhon"/>
 
                         <TextBlock Text="Company"/>
                         <TextBox x:Name="txtcompany"
@@ -204,14 +247,33 @@
                                  Margin="0,6,0,16"
                                  Padding="10"
                                  ToolTip="Enter Company Name"
-                                 PreviewTextInput="OnlyLetters"/>
+                                 Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. Microsoft"/>
+                        <!-- password-->
 
-                        <TextBlock Text="Password"/>
-                        <PasswordBox x:Name="txtpassword"
-                                     Height="40"
-                                     Margin="0,6,0,16"
-                                     ToolTip="Enter Password"
-                                     Padding="10"/>
+                        <!-- Password -->
+                        <StackPanel>
+                            <TextBlock Text="Password"/>
+                            <Grid>
+                                <Border Height="40" CornerRadius="8" Background="White" BorderBrush="#D1D5DB" BorderThickness="1"   Margin="0,6,0,16">
+                                    <PasswordBox x:Name="TxtPassword"
+                         Padding="10"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         PasswordChanged="TxtPassword_PasswordChanged"/>
+                                </Border>
+                                <!-- Placeholder Text -->
+                                <TextBlock x:Name="PasswordPlaceholder"
+                   Text="Enter Password"
+                   Foreground="#9CA3AF"
+                   Height="25"
+                   Margin="12,0,0,0"
+                   VerticalAlignment="Center"
+                   IsHitTestVisible="False"/>
+                            </Grid>
+                        </StackPanel>
+
+
                     </StackPanel>
                 </Grid>
 

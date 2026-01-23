@@ -125,6 +125,91 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!-- TextBox Placeholder Style -->
+        <Style x:Key="PlaceholderTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Background="{TemplateBinding Background}"/>
+
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                  Margin="8,0,0,0"/>
+
+                            <!-- Placeholder -->
+                            <TextBlock Text="{TemplateBinding Tag}"
+                               Foreground="#9CA3AF"
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"
+                               Visibility="Collapsed"
+                               x:Name="Placeholder"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="Placeholder"
+                                Property="Visibility"
+                                Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernDatePickerStyle" TargetType="DatePicker">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DatePicker">
+                        <Border CornerRadius="8"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="40"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Text area -->
+                                <DatePickerTextBox
+                            x:Name="PART_TextBox"
+                            Grid.Column="0"
+                            Padding="10"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            VerticalContentAlignment="Center"/>
+
+                                <!-- Calendar button -->
+                                <Button Grid.Column="1"
+                                x:Name="PART_Button"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Content="📅"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Window.Resources>
 
@@ -171,28 +256,28 @@
                 <!-- LEFT COLUMN -->
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
                     <TextBlock Text="Domain Name" FontSize="12"/>
-                    <TextBox x:Name="txtDomainName" Height="40" ToolTip="Enter Domain Name" PreviewTextInput="OnlyLetters" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtDomainName" Height="40" ToolTip="Enter Domain Name" PreviewTextInput="OnlyLetters" Margin="0,6,0,14" Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. example.com"/>
 
                     <TextBlock Text="Domain Registered Date" FontSize="12"/>
-                    <DatePicker x:Name="dpRegisteredDate" Height="40" ToolTip="Select Registered Date" Margin="0,6,0,14" SelectedDateFormat="Short"/>
+                    <DatePicker x:Name="dpRegisteredDate" Height="40" ToolTip="Select Registered Date" Margin="0,6,0,14" SelectedDateFormat="Short"  Style="{StaticResource ModernDatePickerStyle}" />
 
                     <TextBlock Text="Renewal Date" FontSize="12"/>
-                    <DatePicker x:Name="dpRenewalDate" Height="40" ToolTip="Select Renewal Date" Margin="0,6,0,14" SelectedDateFormat="Short"/>
+                    <DatePicker x:Name="dpRenewalDate" Height="40" ToolTip="Select Renewal Date" Margin="0,6,0,14" SelectedDateFormat="Short"  Style="{StaticResource ModernDatePickerStyle}"/>
 
                     <TextBlock Text="Domain Nameservers2" FontSize="12"/>
-                    <TextBox x:Name="txtdns2" Height="40" ToolTip="Enter DNS1" PreviewTextInput="OnlyLetters" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtdns2" Height="40" ToolTip="Enter DNS1" Margin="0,6,0,14" Padding="10"  Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. ns2.example.com"/>
                 </StackPanel>
 
                 <!-- RIGHT COLUMN -->
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
                     <TextBlock Text="Domain Registrar" FontSize="12"/>
-                    <TextBox x:Name="txtdomainRegistrar" Height="40" ToolTip="Enter Registrar Name" PreviewTextInput="OnlyLetters" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtdomainRegistrar" Height="40" ToolTip="Enter Registrar Name" PreviewTextInput="OnlyLetters" Margin="0,6,0,14" Padding="10"  Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. GoDaddy, Namecheap"/>
 
                     <TextBlock Text="Amount($)" FontSize="12"/>
-                    <TextBox x:Name="txtamount" Height="40" ToolTip="Enter Amount" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtamount" Height="40" ToolTip="Enter Amount" Margin="0,6,0,14" Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Amount in USD"/>
 
                     <TextBlock Text="Domain Nameservers1" FontSize="12"/>
-                    <TextBox x:Name="txtdns1" Height="40" ToolTip="Enter DNS2" PreviewTextInput="OnlyLetters" Margin="0,6,0,14" Padding="10"/>
+                    <TextBox x:Name="txtdns1" Height="40" ToolTip="Enter DNS2" Margin="0,6,0,14" Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. ns1.example.com"/>
 
                     <StackPanel Margin="0,6,0,14">
                         <TextBlock Text="Auto Renew" FontSize="12" Margin="0,0,0,6"/>

@@ -242,7 +242,7 @@
                         <DatePicker x:Name="dpRenewalDate"
                 SelectedDateFormat="Short"
                 Margin="2"
-                                    ToolTip="Select Renewal Date"
+                ToolTip="Select Renewal Date"
                 Background="Transparent"
                 BorderThickness="0"
                 VerticalContentAlignment="Center"/>

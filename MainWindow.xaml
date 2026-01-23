@@ -5,34 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project"
         mc:Ignorable="d"
-               Title="Subscription System" 
+        Title="Subscription System" 
         Height="500" Width="800" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="#F3F4F6">
 
     <DockPanel LastChildFill="True">
-        <Label HorizontalContentAlignment="Center" Name="welcome" Content="Welcome To Subscription System" Background="Black" Foreground="White"   DockPanel.Dock="Top" ></Label>
-        <Menu DockPanel.Dock="Top">
-            <!--<MenuItem Header="Services">
-                <MenuItem Header="Email" Click="EmailData_Click"></MenuItem>
 
-                <MenuItem Header="Domain" Click="DomainData_Click"></MenuItem>
+        <!-- Header -->
+        <Border DockPanel.Dock="Top" Background="#4F46E5" CornerRadius="0,0,10,10" Padding="15">
+            <TextBlock Text="Welcome To Subscription System" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+        </Border>
 
-                <MenuItem Header="Software" Click="SoftwareData_Click"></MenuItem>
+        <Menu DockPanel.Dock="Top" Background="#F9FAFB" FontSize="14" FontWeight="SemiBold">
+            <Menu.Resources>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="Margin" Value="5,0"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#E0E7FF"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Menu.Resources>
 
-            </MenuItem>-->
-            <MenuItem Header="Email" Click="EmailMenu_Click"></MenuItem>
+            <MenuItem Header="Services">
+                <MenuItem Header="Email" Click="EmailData_Click"/>
+                <MenuItem Header="Domain" Click="DomainData_Click"/>
+                <MenuItem Header="Software" Click="SoftwareData_Click"/>
+            </MenuItem>
 
-            <MenuItem Header="Domain" Click="DomainMenu_Click"></MenuItem>
-
-            <MenuItem Header="Software" Click="SoftwareMenu_Click"></MenuItem>
-            <MenuItem Header="Exit" Click="exit_Click"></MenuItem>
-
+            <MenuItem Header="Email" Click="EmailMenu_Click"/>
+            <MenuItem Header="Domain" Click="DomainMenu_Click"/>
+            <MenuItem Header="Software" Click="SoftwareMenu_Click"/>
+            <MenuItem Header="Exit" Click="exit_Click"/>
         </Menu>
+
+
+        <!-- Data Grid -->
         <DataGrid x:Name="dataGrid"
-          DockPanel.Dock="Bottom"
-          AutoGenerateColumns="True"
-          IsReadOnly="True"
-          Margin="10"
-          Visibility="Collapsed"/>
+                  DockPanel.Dock="Bottom"
+                  AutoGenerateColumns="True"
+                  IsReadOnly="True"
+                  Margin="10"
+                  Visibility="Collapsed"
+                  RowBackground="#F9FAFB"
+                  AlternatingRowBackground="#FFFFFF"
+                  GridLinesVisibility="None"
+                  HeadersVisibility="Column"
+                  BorderThickness="0"
+                  FontSize="14"
+                  ColumnHeaderHeight="30"
+                  RowHeight="35"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow"/>
+
     </DockPanel>
 </Window>

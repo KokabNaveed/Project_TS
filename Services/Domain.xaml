@@ -168,49 +168,6 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ModernDatePickerStyle" TargetType="DatePicker">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="#D1D5DB"/>
-            <Setter Property="BorderThickness" Value="1"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="DatePicker">
-                        <Border CornerRadius="8"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Background="{TemplateBinding Background}">
-
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="40"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Text area -->
-                                <DatePickerTextBox
-                            x:Name="PART_TextBox"
-                            Grid.Column="0"
-                            Padding="10"
-                            BorderThickness="0"
-                            Background="Transparent"
-                            VerticalContentAlignment="Center"/>
-
-                                <!-- Calendar button -->
-                                <Button Grid.Column="1"
-                                x:Name="PART_Button"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Cursor="Hand"
-                                Content="📅"/>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
     </Window.Resources>
 
     <Grid>
@@ -259,11 +216,38 @@
                     <TextBox x:Name="txtDomainName" Height="40" ToolTip="Enter Domain Name" PreviewTextInput="OnlyLetters" Margin="0,6,0,14" Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. example.com"/>
 
                     <TextBlock Text="Domain Registered Date" FontSize="12"/>
-                    <DatePicker x:Name="dpRegisteredDate" Height="40" ToolTip="Select Registered Date" Margin="0,6,0,14" SelectedDateFormat="Short"  Style="{StaticResource ModernDatePickerStyle}" />
-
+                    <!--<DatePicker x:Name="dpRegisteredDate" Height="40" ToolTip="Select Registered Date" Margin="0,6,0,14" SelectedDateFormat="Short"  Style="{StaticResource ModernDatePickerStyle}" />-->
+                    <Border CornerRadius="8" 
+        BorderBrush="#D1D5DB" 
+        BorderThickness="1" 
+        Background="White"
+        Height="40" Margin="0,6,0,14">
+                        <DatePicker x:Name="dpRegisteredDate"
+                SelectedDateFormat="Short"
+                Margin="2"
+                                    ToolTip="Select Registered Date"
+                Background="Transparent"
+                BorderThickness="0"
+                VerticalContentAlignment="Center"/>
+                    </Border>
+                    
                     <TextBlock Text="Renewal Date" FontSize="12"/>
-                    <DatePicker x:Name="dpRenewalDate" Height="40" ToolTip="Select Renewal Date" Margin="0,6,0,14" SelectedDateFormat="Short"  Style="{StaticResource ModernDatePickerStyle}"/>
+                    <!--<DatePicker x:Name="dpRenewalDate" Height="40" ToolTip="Select Renewal Date" Margin="0,6,0,14" SelectedDateFormat="Short"  Style="{StaticResource ModernDatePickerStyle}"/>-->
 
+                    <Border CornerRadius="8" 
+        BorderBrush="#D1D5DB" 
+        BorderThickness="1" 
+        Background="White"
+        Height="40" Margin="0,6,0,14">
+                        <DatePicker x:Name="dpRenewalDate"
+                SelectedDateFormat="Short"
+                Margin="2"
+                                    ToolTip="Select Renewal Date"
+                Background="Transparent"
+                BorderThickness="0"
+                VerticalContentAlignment="Center"/>
+                    </Border>
+                    
                     <TextBlock Text="Domain Nameservers2" FontSize="12"/>
                     <TextBox x:Name="txtdns2" Height="40" ToolTip="Enter DNS1" Margin="0,6,0,14" Padding="10"  Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. ns2.example.com"/>
                 </StackPanel>

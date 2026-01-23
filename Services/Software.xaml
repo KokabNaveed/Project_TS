@@ -310,9 +310,17 @@
                     <TextBox x:Name="txtemail" Height="40" ToolTip="Enter Email" Margin="0,6,0,14" Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="e.g. user@example.com"/>
 
                     <TextBlock Text="Renewal Date" FontSize="12"/>
-                    <DatePicker x:Name="dpRenewalDate" Height="40" ToolTip="Select Renewal Date" Margin="0,6,0,14" SelectedDateFormat="Short" Style="{StaticResource ModernDatePickerStyle}"/>
+                    <Border CornerRadius="8" 
+       BorderBrush="#D1D5DB" 
+       BorderThickness="1" 
+       Background="White"
+       Height="40" Margin="0,6,0,14">
+                        <DatePicker x:Name="dpRenewalDate" ToolTip="Select Renewal Date" SelectedDateFormat="Short"  Margin="2"
+ Background="Transparent"
+ BorderThickness="0"
+ VerticalContentAlignment="Center"/>
 
-
+                    </Border>
                 </StackPanel>
 
                 <!-- RIGHT COLUMN -->
@@ -335,7 +343,17 @@
                     <TextBox x:Name="txtamount" Height="40" Margin="0,6,0,14" Padding="10" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Amount in USD"/>
 
                     <TextBlock Text="Subscribed Date" FontSize="12"/>
-                    <DatePicker x:Name="dpSubscribeddate" Height="40" ToolTip="Select Subscribed Date" Margin="0,6,0,14" SelectedDateFormat="Short" Style="{StaticResource ModernDatePickerStyle}"/>
+                    <Border CornerRadius="8" 
+       BorderBrush="#D1D5DB" 
+       BorderThickness="1" 
+       Background="White"
+       Height="40" Margin="0,6,0,14">
+                        <DatePicker x:Name="dpSubscribeddate" ToolTip="Select Subscribed Date" Margin="2"
+ Background="Transparent"
+ BorderThickness="0"
+ VerticalContentAlignment="Center"
+ SelectedDateFormat="Short"/>
+                    </Border>
                 </StackPanel>
 
                 <!-- SUBMIT BUTTON -->

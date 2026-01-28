@@ -7,11 +7,11 @@ namespace Project.Models
         [Key]
         public int Id { get; set; }
 
-        public string SoftwareName { get; set; }
-        public string PlanType { get; set; }
-        public string Category { get; set; }
+        public string SoftwareName { get; set; } = string.Empty;
+        public string PlanType { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
 
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;  
 
         public DateTime SubscribedDate { get; set; }
         public DateTime? RenewalDate { get; set; }

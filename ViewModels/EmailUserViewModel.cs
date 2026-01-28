@@ -19,7 +19,7 @@ namespace Project.ViewModels
             _service = new EmailUserService();
             User = new EmailUser();
 
-            CreateUserCommand = new RelayCommand(CreateUser);
+            CreateUserCommand = new RelayCommand(o => CreateUser());
         }
 
         private void CreateUser()

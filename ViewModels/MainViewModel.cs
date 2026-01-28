@@ -33,8 +33,8 @@ namespace Project.ViewModels
             CurrentView = new EmailView(); // default
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propName = null)
+        public event PropertyChangedEventHandler ?PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string ?propName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }

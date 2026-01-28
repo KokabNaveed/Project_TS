@@ -18,7 +18,7 @@ namespace Project.ViewModels
         {
             _domainService = new DomainService();
             Domain = new DomainSubscription();
-            SubmitCommand = new RelayCommand(Submit);
+            SubmitCommand = new RelayCommand(o=>Submit());
         }
 
         private void Submit()

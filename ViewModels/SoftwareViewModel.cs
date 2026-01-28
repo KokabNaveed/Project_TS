@@ -34,7 +34,7 @@ namespace Project.ViewModels
                 "Software", "Accounting", "Enterprise"
             };
 
-            SubmitCommand = new RelayCommand(Submit);
+            SubmitCommand = new RelayCommand(o => Submit());
         }
 
         private void Submit()

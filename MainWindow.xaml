@@ -3,69 +3,51 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Project"
+        xmlns:local2="clr-namespace:Project.ViewModels"
         mc:Ignorable="d"
-        Title="Subscription System" 
-        Height="500" Width="800" 
+        Title="Subscription System"
+        Height="500" Width="800"
         WindowStartupLocation="CenterScreen"
         Background="#F3F4F6">
 
+    <!-- ViewModel -->
+    <Window.DataContext>
+        <local2:MainViewModel />
+    </Window.DataContext>
+
+    <!-- ONE root layout -->
     <DockPanel LastChildFill="True">
 
         <!-- Header -->
-        <Border DockPanel.Dock="Top" Background="#4F46E5" CornerRadius="0,0,10,10" Padding="15">
-            <TextBlock Text="Welcome To Subscription System" 
-                       FontSize="20" 
-                       FontWeight="Bold" 
+        <Border DockPanel.Dock="Top"
+                Background="#4F46E5"
+                CornerRadius="0,0,10,10"
+                Padding="15">
+            <TextBlock Text="Welcome To Subscription System"
+                       FontSize="20"
+                       FontWeight="Bold"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
         </Border>
 
-        <Menu DockPanel.Dock="Top" Background="#F9FAFB" FontSize="14" FontWeight="SemiBold">
-            <Menu.Resources>
-                <Style TargetType="MenuItem">
-                    <Setter Property="Padding" Value="10,5"/>
-                    <Setter Property="Margin" Value="5,0"/>
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#E0E7FF"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Menu.Resources>
+        <!-- Menu -->
+        <Menu DockPanel.Dock="Top"
+              Background="#F9FAFB"
+              FontSize="14"
+              FontWeight="SemiBold">
 
-            <MenuItem Header="Services">
-                <MenuItem Header="Email" Click="EmailData_Click"/>
-                <MenuItem Header="Domain" Click="DomainData_Click"/>
-                <MenuItem Header="Software" Click="SoftwareData_Click"/>
-            </MenuItem>
-
-            <MenuItem Header="Email" Click="EmailMenu_Click"/>
-            <MenuItem Header="Domain" Click="DomainMenu_Click"/>
-            <MenuItem Header="Software" Click="SoftwareMenu_Click"/>
-            <MenuItem Header="Exit" Click="exit_Click"/>
+            <MenuItem Header="Email"
+                      Command="{Binding ShowEmailCommand}" />
+            <MenuItem Header="Domain"
+                      Command="{Binding ShowDomainCommand}" />
+            <MenuItem Header="Software"
+                      Command="{Binding ShowSoftwareCommand}" />
         </Menu>
 
-
-        <!-- Data Grid -->
-        <DataGrid x:Name="dataGrid"
-                  DockPanel.Dock="Bottom"
-                  AutoGenerateColumns="True"
-                  IsReadOnly="True"
-                  Margin="10"
-                  Visibility="Collapsed"
-                  RowBackground="#F9FAFB"
-                  AlternatingRowBackground="#FFFFFF"
-                  GridLinesVisibility="None"
-                  HeadersVisibility="Column"
-                  BorderThickness="0"
-                  FontSize="14"
-                  ColumnHeaderHeight="30"
-                  RowHeight="35"
-                  SelectionMode="Single"
-                  SelectionUnit="FullRow"/>
+        <!-- MAIN CONTENT (THIS IS WHERE VIEWS CHANGE) -->
+        <ContentControl Content="{Binding CurrentView}"
+                        Margin="10"/>
 
     </DockPanel>
+
 </Window>

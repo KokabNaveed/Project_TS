@@ -13,7 +13,7 @@ public class AppDbContext : DbContext
         );
     }
 
-    public DbSet<DomainEntity> Domains { get; set; }
-    public DbSet<SoftwareEntity> Softwares { get; set; }
-    public DbSet<EmailEntity> EmailUsers { get; set; }
+    public DbSet<DomainSubscription> Domains { get; set; }
+    public DbSet<SoftwareSubscription> Softwares { get; set; }
+    public DbSet<EmailUser> EmailUsers { get; set; }
 }

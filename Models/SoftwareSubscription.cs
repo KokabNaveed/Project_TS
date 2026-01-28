@@ -2,7 +2,7 @@
 
 namespace Project.Models
 {
-    public class SoftwareEntity
+    public class SoftwareSubscription
     {
         [Key]
         public int Id { get; set; }

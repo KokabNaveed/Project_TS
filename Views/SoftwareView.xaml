@@ -1,0 +1,319 @@
+﻿<UserControl x:Class="Project.Views.SoftwareView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Height="600"
+             Width="800"
+             Background="#F3F4F6">
+        <UserControl.Resources>
+
+            <Style x:Key="ElegantButtonStyle" TargetType="Button">
+                <Setter Property="Height" Value="44"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="#4F46E5"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                        CornerRadius="10"
+                        Background="{TemplateBinding Background}">
+                                <Border.Effect>
+                                    <DropShadowEffect
+                            BlurRadius="0"
+                            ShadowDepth="0"
+                            Opacity="0"/>
+                                </Border.Effect>
+
+                                <ContentPresenter
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <!-- Hover -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+
+                                                <!-- Scale -->
+                                                <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                        To="1.04"
+                                        Duration="0:0:0.15"/>
+                                                <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                        To="1.04"
+                                        Duration="0:0:0.15"/>
+
+                                                <!-- Shadow -->
+                                                <DoubleAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)"
+                                        To="18"
+                                        Duration="0:0:0.15"/>
+                                                <DoubleAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
+                                        To="0.35"
+                                        Duration="0:0:0.15"/>
+
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+
+                                                <!-- Reset scale -->
+                                                <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                        To="1"
+                                        Duration="0:0:0.15"/>
+                                                <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                        To="1"
+                                        Duration="0:0:0.15"/>
+
+                                                <!-- Remove shadow -->
+                                                <DoubleAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)"
+                                        To="0"
+                                        Duration="0:0:0.15"/>
+                                                <DoubleAnimation
+                                        Storyboard.TargetName="border"
+                                        Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
+                                        To="0"
+                                        Duration="0:0:0.15"/>
+
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+
+                                <!-- Pressed -->
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- TextBox Placeholder Style -->
+            <Style x:Key="PlaceholderTextBoxStyle" TargetType="TextBox">
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="#D1D5DB"/>
+                <Setter Property="BorderThickness" Value="1"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Grid>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Background="{TemplateBinding Background}"/>
+
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                  Margin="8,0,0,0"/>
+
+                                <!-- Placeholder -->
+                                <TextBlock Text="{TemplateBinding Tag}"
+                               Foreground="#9CA3AF"
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"
+                               Visibility="Collapsed"
+                               x:Name="Placeholder"/>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter TargetName="Placeholder"
+                                Property="Visibility"
+                                Value="Visible"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </UserControl.Resources>
+        <Grid>
+            <Border Width="650"
+                Padding="30"
+                CornerRadius="16"
+                Background="White"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+
+                <Grid>
+                    <!-- Columns -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Rows -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Header -->
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Button -->
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <StackPanel Grid.ColumnSpan="2" Margin="0,0,0,20">
+                        <TextBlock Text="Software Subscription"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="Enter Your Details and Choose Plan"
+                            FontSize="12"
+                            Foreground="Gray"
+                            HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- LEFT COLUMN -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
+                        <TextBlock Text="Software Name" FontSize="12"/>
+                        <TextBox Text="{Binding Software.SoftwareName, UpdateSourceTrigger=PropertyChanged}"
+                             Height="40" 
+                             Margin="0,6,0,14" 
+                             Padding="10" 
+                             ToolTip="Enter Software Name"
+                             Style="{StaticResource PlaceholderTextBoxStyle}" 
+                             Tag="e.g. Microsoft Office"/>
+
+                        <TextBlock Text="Plan Type" FontSize="12"/>
+                        <Border CornerRadius="8" 
+                            BorderBrush="#D1D5DB" 
+                            BorderThickness="1" 
+                            Background="White"
+                            Height="40"
+                            Margin="0,6,0,14">
+                            <ComboBox
+                            ItemsSource="{Binding PlanTypes}"
+                            SelectedItem="{Binding Software.PlanType}"
+                            Padding="10,4"
+                            Background="Transparent"
+                            BorderThickness="0" ToolTip="Select Plan Type">
+                            </ComboBox>
+                        </Border>
+
+
+                        <TextBlock Text="Email Subscribed With" FontSize="12"/>
+                        <TextBox Text="{Binding Software.Email, UpdateSourceTrigger=PropertyChanged}"
+                             Height="40"
+                             ToolTip="Enter Email" 
+                             Margin="0,6,0,14" 
+                             Padding="10" 
+                             Style="{StaticResource PlaceholderTextBoxStyle}" 
+                             Tag="e.g. user@example.com"/>
+
+                        <TextBlock Text="Renewal Date" FontSize="12"/>
+                        <Border CornerRadius="8" 
+                               BorderBrush="#D1D5DB" 
+                               BorderThickness="1" 
+                               Background="White"
+                               Height="40" Margin="0,6,0,14">
+                            <DatePicker SelectedDate="{Binding Software.RenewalDate}" 
+                                    ToolTip="Select Renewal Date" 
+                                    SelectedDateFormat="Short"  
+                                    Margin="2"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    VerticalContentAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- RIGHT COLUMN -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
+                        <TextBlock Text="Category" FontSize="12"/>
+                        <Border CornerRadius="8" 
+                            BorderBrush="#D1D5DB" 
+                            BorderThickness="1" 
+                            Background="White"
+                            Height="40"
+                            Margin="0,6,0,14">
+                            <ComboBox ItemsSource="{Binding Categories}"
+                                  SelectedItem="{Binding Software.Category}"
+                                  Padding="10,4"
+                                  Background="Transparent"
+                                  BorderThickness="0"
+                                  IsEditable="False"
+                                  ToolTip="Select Category">
+                            </ComboBox>
+                        </Border>
+
+                        <TextBlock Text="Amount($)" FontSize="12"/>
+                        <TextBox Text="{Binding Software.Amount, UpdateSourceTrigger=PropertyChanged}"
+                             Height="40" 
+                             Margin="0,6,0,14"
+                             Padding="10" 
+                             Style="{StaticResource PlaceholderTextBoxStyle}" 
+                             Tag="Amount in USD"/>
+
+                        <TextBlock Text="Subscribed Date" FontSize="12"/>
+                        <Border CornerRadius="8" 
+                            BorderBrush="#D1D5DB" 
+                            BorderThickness="1" 
+                            Background="White"
+                            Height="40"
+                            Margin="0,6,0,14">
+                            <DatePicker SelectedDate="{Binding Software.SubscribedDate}"
+                                    ToolTip="Select Subscribed Date" 
+                                    Margin="2"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    VerticalContentAlignment="Center"
+                                    SelectedDateFormat="Short"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- SUBMIT BUTTON -->
+                    <Button Grid.Row="5"
+                     Grid.ColumnSpan="2"
+                     Margin="0,15,0,0"
+                     Content="SUBMIT"
+                     Style="{StaticResource ElegantButtonStyle}"
+                     Cursor="Hand"
+                     Command="{Binding SubmitCommand}"/>
+                </Grid>
+            </Border>
+        </Grid>
+</UserControl>

@@ -1,6 +1,6 @@
 ﻿namespace Project.Models
 {
-    public class DomainEntity
+    public class DomainSubscription
     {
         public int Id { get; set; }
         public string DomainName { get; set; }

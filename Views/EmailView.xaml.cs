@@ -12,7 +12,17 @@ namespace Project.Views
         public EmailView()
         {
             InitializeComponent();
-            DataContext = new EmailUserViewModel();
+            var vm = new EmailUserViewModel();
+
+            DataContext = vm;
+
+
+
+            // Subscribe to event to clear password
+            vm.ClearPasswordRequested += () =>
+            {
+                TxtPassword.Password = string.Empty;
+            };
         }
 
         // PasswordBox exception (MVVM-acceptable)
@@ -21,6 +31,11 @@ namespace Project.Views
             if (DataContext is EmailUserViewModel vm)
             {
                 vm.User.Password = TxtPassword.Password;
+
+                // Toggle placeholder visibility
+                PasswordPlaceholder.Visibility = string.IsNullOrEmpty(TxtPassword.Password)
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
             }
         }
     }

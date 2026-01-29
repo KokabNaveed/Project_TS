@@ -21,7 +21,7 @@ namespace Project.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Project.Models.DomainEntity", b =>
+            modelBuilder.Entity("Project.Models.DomainSubscription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,7 +62,7 @@ namespace Project.Migrations
                     b.ToTable("Domains");
                 });
 
-            modelBuilder.Entity("Project.Models.EmailEntity", b =>
+            modelBuilder.Entity("Project.Models.EmailUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -98,7 +98,7 @@ namespace Project.Migrations
                     b.ToTable("EmailUsers");
                 });
 
-            modelBuilder.Entity("Project.Models.SoftwareEntity", b =>
+            modelBuilder.Entity("Project.Models.SoftwareSubscription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -10,7 +10,19 @@ namespace Project.ViewModels
     {
         private readonly EmailUserService _service;
 
-        public EmailUser User { get; set; }
+        private EmailUser _user;
+        public EmailUser User
+        {
+            get => _user;
+            set
+            {
+                _user = value;
+                OnPropertyChanged();   
+            }
+        }
+
+        public event Action? ClearPasswordRequested;
+
 
         public ICommand CreateUserCommand { get; }
 
@@ -38,6 +50,13 @@ namespace Project.ViewModels
 
             _service.AddUser(User);
             MessageBox.Show("User created successfully");
+
+            User = new EmailUser();
+
+            OnPropertyChanged(nameof(User));
+
+            // Trigger password clear in the view
+            ClearPasswordRequested?.Invoke();
         }
     }
 }

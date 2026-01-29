@@ -228,7 +228,7 @@
                                  Tag="e.g. user@example.com"/>
 
                         <TextBlock Text="Storage (GB)"/>
-                        <TextBox Text="{Binding User.Storage, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox Text="{Binding User.StorageGB, UpdateSourceTrigger=PropertyChanged}"
                                  Height="40"
                                  Margin="0,6,0,16"
                                  Padding="10"

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260120171001_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260129152414_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace Project.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Project.Models.DomainEntity", b =>
+            modelBuilder.Entity("Project.Models.DomainSubscription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace Project.Migrations
                     b.ToTable("Domains");
                 });
 
-            modelBuilder.Entity("Project.Models.EmailEntity", b =>
+            modelBuilder.Entity("Project.Models.EmailUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,7 +101,7 @@ namespace Project.Migrations
                     b.ToTable("EmailUsers");
                 });
 
-            modelBuilder.Entity("Project.Models.SoftwareEntity", b =>
+            modelBuilder.Entity("Project.Models.SoftwareSubscription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

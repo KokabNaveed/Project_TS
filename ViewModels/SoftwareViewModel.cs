@@ -11,7 +11,21 @@ namespace Project.ViewModels
     {
         private readonly SoftwareService _softwareService;
 
-        public SoftwareSubscription Software { get; set; }
+
+        private SoftwareSubscription _softwareSubscription;
+
+        public SoftwareSubscription Software
+        {
+            get
+            {
+                return _softwareSubscription;
+            }
+            set
+            {
+                _softwareSubscription = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<string> PlanTypes { get; }
         public ObservableCollection<string> Categories { get; }
@@ -22,7 +36,11 @@ namespace Project.ViewModels
         {
             _softwareService = new SoftwareService();
 
-            Software = new SoftwareSubscription();
+            Software = new SoftwareSubscription
+            {
+                SubscribedDate = DateTime.Now
+            };
+
 
             PlanTypes = new ObservableCollection<string>
             {
@@ -33,7 +51,7 @@ namespace Project.ViewModels
             {
                 "Software", "Accounting", "Enterprise"
             };
-
+            
             SubmitCommand = new RelayCommand(o => Submit());
         }
 
@@ -48,6 +66,10 @@ namespace Project.ViewModels
             _softwareService.AddSoftwareSubscription(Software);
 
             MessageBox.Show("Software subscription saved successfully!");
+
+            Software = new SoftwareSubscription();
+            OnPropertyChanged(nameof(Software));
+
         }
     }
 }

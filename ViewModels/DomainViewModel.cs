@@ -10,7 +10,19 @@ namespace Project.ViewModels
     {
         private readonly DomainService _domainService;
 
-        public DomainSubscription Domain { get; set; }
+        private DomainSubscription _domainSubscription;
+        public DomainSubscription Domain {
+            get
+            {
+                return _domainSubscription;
+            }
+
+            set
+            {
+                _domainSubscription = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand SubmitCommand { get; }
 
@@ -32,6 +44,9 @@ namespace Project.ViewModels
             _domainService.AddDomain(Domain);
 
             MessageBox.Show("Domain saved successfully!");
+
+            Domain = new DomainSubscription();
+
         }
     }
 }

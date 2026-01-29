@@ -6,7 +6,7 @@ using Project.Views;
 
 namespace Project.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
         private object _currentView;
 
@@ -26,17 +26,27 @@ namespace Project.ViewModels
 
         public MainViewModel()
         {
-            ShowEmailCommand = new RelayCommand(o => CurrentView = new EmailView());
-            ShowDomainCommand = new RelayCommand(o => CurrentView = new DomainView());
-            ShowSoftwareCommand = new RelayCommand(o => CurrentView = new SoftwareView());
+            ShowEmailCommand = new RelayCommand(o=>EmailCommand());
+            ShowDomainCommand = new RelayCommand(o => DomainCommand());
+            ShowSoftwareCommand = new RelayCommand(o =>SoftwareCommand());
 
             CurrentView = new EmailView(); // default
         }
 
-        public event PropertyChangedEventHandler ?PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string ?propName = null)
+        private void EmailCommand()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            CurrentView = new EmailView();
         }
+
+        private void DomainCommand()
+        {
+            CurrentView = new DomainView();
+        }
+
+        private void SoftwareCommand() 
+        { 
+            CurrentView = new SoftwareView();
+        }
+
     }
 }

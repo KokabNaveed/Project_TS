@@ -9,8 +9,20 @@ The application manages:
 - **Email Users**
 - **Software Subscriptions**
 - **Domain Subscriptions**
+- **Dashboard Overview**
 
-with a modern WPF UI, command-based actions, and database persistence.
+
+## 📊 Dashboard Overview
+The application contains a **central dashboard** that provides a quick system overview.
+
+### Dashboard Features
+- 📧 **Total Email Users count**
+- 🌐 **Total Domains count**
+- 💻 **Total Software Subscriptions count**
+- Real-time updates when records are added or removed
+- Clean, read-only summary view for administrators
+
+The dashboard helps users instantly understand system usage without navigating into individual modules.
 
 ---
 
@@ -62,7 +74,9 @@ Project│
 │   └── SoftwareView.xaml
 │
 ├── ViewModels
+│   ├── DashboardViewModel.cs
 │   ├── EmailUserViewModel.cs
+│   ├── DomainViewModel.cs
 │   └── SoftwareViewModel.cs
 │
 ├── Services
@@ -77,7 +91,7 @@ Project│
 │
 ├── Styles
 │   └── Controls.xaml
-└── App.config
+└── App.xaml
 ```
 
 ## 🛠 Tech Stack
@@ -110,3 +124,46 @@ Project│
 git clone <repository_url>
 cd <project_folder>
 ```
+
+### 2. Configure Database
+
+- Start MySQL from XAMPP
+- Create Database Named `TS`
+- Update connection String in `Data/AppDBContext.cs`
+```bash
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+    {
+        options.UseMySql(
+            "server=localhost;database=TS;user=root;password=;",
+            new MySqlServerVersion(new Version(8,0,32))
+        );
+    }
+```
+
+### 3. Run Migrations
+```bash
+Add-Migration InitialCreate
+Update-Database
+```
+
+### 4. Run the Application
+
+-  Open the solution in Visual Studio
+
+- Press F5
+
+---
+
+### 🔁 CRUD Workflow (Example)
+
+- User enters data in the form
+
+- Clicks Submit
+
+- RelayCommand triggers ViewModel method
+
+- ViewModel calls Service
+
+- Service updates MySQL via EF Core
+
+- Dashboard & DataGrids refresh automatically

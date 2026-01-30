@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:Project.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Height="600"
+             Height="800"
              Width="800"
              Background="#F3F4F6">
     <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
             <Border Width="650"
                 Padding="30"
                 CornerRadius="16"
@@ -156,5 +157,36 @@
                      Command="{Binding SubmitCommand}"/>
                 </Grid>
             </Border>
-        </Grid>
+            <DataGrid ItemsSource="{Binding SoftwareList}" AutoGenerateColumns="False"
+                      CanUserAddRows="False" Width="750" Height="250"
+                      RowHeight="30" HeadersVisibility="Column" Margin="0,0,0,20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                    <DataGridTextColumn Header="Software" Binding="{Binding SoftwareName}" Width="*"/>
+                    <DataGridTextColumn Header="Plan" Binding="{Binding PlanType}" Width="*"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="*"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="*"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                    <DataGridTextColumn Header="Subscribed Date" Binding="{Binding SubscribedDate}" Width="*"/>
+                    <DataGridTextColumn Header="Renewal Date" Binding="{Binding RenewalDate}" Width="*"/>
+
+                    <DataGridTemplateColumn Header="Actions" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="Edit"
+                                            Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" Margin="5,0"/>
+                                    <Button Content="Delete"
+                                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" Margin="5,0"
+                                            Background="#EF4444" Foreground="White"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
 </UserControl>

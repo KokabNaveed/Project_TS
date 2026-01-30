@@ -2,6 +2,7 @@
 using Project.Models;
 using Project.Services;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,9 +23,11 @@ namespace Project.ViewModels
             }
         }
 
+        public ObservableCollection<EmailUser> EmailList { get; set; } = new();
+
         public event Action? ClearPasswordRequested;
 
-        public ICommand CreateUserCommand { get; }
+        public ICommand SubmitCommand { get; } // Use single command for Add/Edit
         public ICommand DeleteUserCommand { get; }
         public ICommand EditUserCommand { get; }
 
@@ -33,71 +36,72 @@ namespace Project.ViewModels
             _service = new EmailUserService();
             User = new EmailUser();
 
-            CreateUserCommand = new RelayCommand(o => CreateUser());
+            SubmitCommand = new RelayCommand(o => SubmitUser());
             DeleteUserCommand = new RelayCommand(o => DeleteUser(o as EmailUser));
-            EditUserCommand = new RelayCommand(o => EditUser(o as EmailUser));
+            EditUserCommand = new RelayCommand(o => LoadUserForEdit(o as EmailUser));
+
+            LoadEmails();
         }
 
-        private void CreateUser()
+        private void LoadEmails()
         {
-            if (string.IsNullOrWhiteSpace(User.EmailAddress))
-            {
-                MessageBox.Show("Email is required", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            EmailList.Clear();
+            foreach (var e in _service.GetAll())
+                EmailList.Add(e);
+        }
 
-            if (_service.EmailExists(User.EmailAddress))
-            {
-                MessageBox.Show("Email already exists", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+        private void LoadUserForEdit(EmailUser user)
+        {
+            if (user == null) return;
 
-            _service.AddUser(User);
-            MessageBox.Show("User created successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            User.Id = user.Id;
+            User.FirstName = user.FirstName;
+            User.LastName = user.LastName;
+            User.EmailAddress = user.EmailAddress;
+            User.Company = user.Company;
+            User.Password = user.Password;
+            User.StorageGB = user.StorageGB;
+
+            OnPropertyChanged(nameof(User));
+        }
+
+
+        private void SubmitUser()
+        {
+            if (User.Id > 0)
+            {
+                _service.UpdateUser(User);
+
+                // Update ObservableCollection
+                var existing = EmailList.FirstOrDefault(u => u.Id == User.Id);
+                if (existing != null)
+                {
+                    existing.FirstName = User.FirstName;
+                    existing.LastName = User.LastName;
+                    existing.EmailAddress = User.EmailAddress;
+                    existing.Company = User.Company;
+                    existing.StorageGB = User.StorageGB;
+                    existing.Password = User.Password;
+                }
+            }
+            else
+            {
+                _service.AddUser(User);
+                EmailList.Add(User); // Add new user to collection
+            }
 
             User = new EmailUser();
             ClearPasswordRequested?.Invoke();
+            LoadEmails();
         }
 
-        private void EditUser(EmailUser user)
-        {
-            if (user == null)
-            {
-                MessageBox.Show("No user selected to edit", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(user.EmailAddress))
-            {
-                MessageBox.Show("Email cannot be empty", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Optional: Check if email is changing to one that already exists
-            if (_service.EmailExists(user.EmailAddress) && user.Id != _service.GetUserIdByEmail(user.EmailAddress))
-            {
-                MessageBox.Show("Another user with this email already exists", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            _service.UpdateUser(user);
-            MessageBox.Show("User updated successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            // Refresh current user
-            User = new EmailUser();
-            ClearPasswordRequested?.Invoke();
-        }
 
         private void DeleteUser(EmailUser user)
         {
-            if (user == null)
-            {
-                MessageBox.Show("No user selected to delete", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            if (user == null) return;
 
-            var result = MessageBox.Show($"Are you sure you want to delete {user.EmailAddress}?", "Confirm Delete",
-                                         MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show($"Are you sure you want to delete {user.EmailAddress}?",
+                                         "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -106,6 +110,8 @@ namespace Project.ViewModels
 
                 User = new EmailUser();
                 ClearPasswordRequested?.Invoke();
+
+                LoadEmails();
             }
         }
     }

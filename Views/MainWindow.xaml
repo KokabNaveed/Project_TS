@@ -47,16 +47,13 @@
                     Style="{StaticResource ElegantButtonStyle}"
                     Command="{Binding ShowHomeCommand}"
                     Margin="0,5,0,0"/>
-            <Button Content="All Emails" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowEmailListCommand}" Margin="0,5,0,0"/>
-            <Button Content="Add Email" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowEmailCommand}" Margin="0,5,0,0"/>
+            <Button Content="Email" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowEmailCommand}" Margin="0,5,0,0"/>
 
             <!-- Software -->
-            <Button Content="All Software" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowSoftwareListCommand}" Margin="0,5,0,0"/>
-            <Button Content="Add Software" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowSoftwareCommand}" Margin="0,5,0,0"/>
+            <Button Content="Software" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowSoftwareCommand}" Margin="0,5,0,0"/>
 
             <!-- Domain -->
-            <Button Content="All Domains" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowDomainListCommand}" Margin="0,5,0,0"/>
-            <Button Content="Add Domain" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowDomainCommand}" Margin="0,5,0,0"/>
+            <Button Content="Domain" Style="{StaticResource ElegantButtonStyle}" Command="{Binding ShowDomainCommand}" Margin="0,5,0,0"/>
 
             <Button Content="Exit"
                     Style="{StaticResource ElegantButtonStyle}"

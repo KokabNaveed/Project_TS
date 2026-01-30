@@ -29,9 +29,6 @@ namespace Project.ViewModels
         public ICommand ShowDomainCommand { get; }
         public ICommand ShowSoftwareCommand { get; }
 
-        public ICommand ShowEmailListCommand { get; }
-        public ICommand ShowDomainListCommand { get; }
-        public ICommand ShowSoftwareListCommand { get; }
         public ICommand LogoutCommand { get; }
 
         public MainViewModel()
@@ -39,7 +36,6 @@ namespace Project.ViewModels
             ShowEmailCommand = new RelayCommand(o => EmailCommand());
             ShowDomainCommand = new RelayCommand(o => DomainCommand());
             ShowSoftwareCommand = new RelayCommand(o => SoftwareCommand());
-            ShowSoftwareListCommand = new RelayCommand(o => ShowSoftware());
             ShowHomeCommand = new RelayCommand(o => HomeCommand());
             LogoutCommand = new RelayCommand(o => ExitCommand());
 
@@ -66,11 +62,7 @@ namespace Project.ViewModels
         { 
             CurrentView = new SoftwareView();
         }
-        private void ShowSoftware()
-        {
-            CurrentView = new ListViewControl();
 
-        }
         private void ExitCommand()
         {
 

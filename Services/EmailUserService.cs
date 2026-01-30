@@ -57,7 +57,6 @@ namespace Project.Services
                 existing.LastName = user.LastName;
                 existing.StorageGB= user.StorageGB;
                 existing.Company= user.Company;
-                db.EmailUsers.Add(existing);
 
                 db.SaveChanges();
             }

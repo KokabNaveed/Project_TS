@@ -5,53 +5,55 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project.Views"
              mc:Ignorable="d" 
-             Height="600"
+             Height="800"
              Width="800"
              Background="#F3F4F6">
     <Grid>
-        <Border Width="650"
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+            <Border Width="650"
                 Padding="30"
                 CornerRadius="16"
                 Background="White"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
 
-            <Grid>
-                <!-- Columns -->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <Grid>
+                    <!-- Columns -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <!-- Rows -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <!-- Rows -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Header -->
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Button -->
+                    </Grid.RowDefinitions>
+
                     <!-- Header -->
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <!-- Button -->
-                </Grid.RowDefinitions>
-
-                <!-- Header -->
-                <StackPanel Grid.ColumnSpan="2" Margin="0,0,0,20">
-                    <TextBlock Text="Domain Details"
+                    <StackPanel Grid.ColumnSpan="2" Margin="0,0,0,20">
+                        <TextBlock Text="Domain Details"
                                FontSize="20"
                                FontWeight="Bold"
                                HorizontalAlignment="Center"/>
 
-                    <TextBlock Text="Enter Your Domain Details"
+                        <TextBlock Text="Enter Your Domain Details"
                                FontSize="12"
                                Foreground="Gray"
                                HorizontalAlignment="Center"/>
-                </StackPanel>
+                    </StackPanel>
 
-                <!-- LEFT COLUMN -->
-                <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
-                    <TextBlock Text="Domain Name" FontSize="12"/>
-                    <TextBox Text="{Binding Domain.DomainName, UpdateSourceTrigger=PropertyChanged}" 
+                    <!-- LEFT COLUMN -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,15,0">
+                        <TextBlock Text="Domain Name" FontSize="12"/>
+                        <TextBox Text="{Binding Domain.DomainName, UpdateSourceTrigger=PropertyChanged}" 
                              Height="40"
                              ToolTip="Enter Domain Name"
                              Margin="0,6,0,14" 
@@ -59,58 +61,58 @@
                              Style="{StaticResource PlaceholderTextBoxStyle}" 
                              Tag="e.g. example.com"/>
 
-                    <TextBlock Text="Domain Registered Date" FontSize="12"/>
-                    <Border CornerRadius="8" 
+                        <TextBlock Text="Domain Registered Date" FontSize="12"/>
+                        <Border CornerRadius="8" 
                             BorderBrush="#D1D5DB" 
                             BorderThickness="1" 
                             Background="White"
                             Height="40" Margin="0,6,0,14">
-                        <DatePicker SelectedDate="{Binding Domain.RegisteredDate}"
+                            <DatePicker SelectedDate="{Binding Domain.RegisteredDate}"
                                     SelectedDateFormat="Short"
                                     Margin="2"
                                     ToolTip="Select Registered Date"
                                     Background="Transparent"
                                     BorderThickness="0"
                                     VerticalContentAlignment="Center"/>
-                    </Border>
+                        </Border>
 
-                    <TextBlock Text="Renewal Date" FontSize="12"/>
-                    <Border CornerRadius="8" 
+                        <TextBlock Text="Renewal Date" FontSize="12"/>
+                        <Border CornerRadius="8" 
                             BorderBrush="#D1D5DB" 
                             BorderThickness="1" 
                             Background="White"
                             Height="40" Margin="0,6,0,14">
-                        <DatePicker SelectedDate="{Binding Domain.RenewalDate}"
+                            <DatePicker SelectedDate="{Binding Domain.RenewalDate}"
                                     SelectedDateFormat="Short"
                                     Margin="2"
                                     ToolTip="Select Renewal Date"
                                     Background="Transparent"
                                     BorderThickness="0"
                                     VerticalContentAlignment="Center"/>
-                    </Border>
+                        </Border>
 
-                    <TextBlock Text="Domain Nameservers2" FontSize="12"/>
-                    <TextBox Text="{Binding Domain.NameServer2}" 
+                        <TextBlock Text="Domain Nameservers2" FontSize="12"/>
+                        <TextBox Text="{Binding Domain.NameServer2}" 
                              Height="40" 
                              ToolTip="Enter DNS2" 
                              Margin="0,6,0,14" 
                              Padding="10" 
                              Style="{StaticResource PlaceholderTextBoxStyle}" 
                              Tag="e.g. ns2.example.com"/>
-                </StackPanel>
+                    </StackPanel>
 
-                <!-- RIGHT COLUMN -->
-                <StackPanel Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
-                    <TextBlock Text="Domain Registrar" FontSize="12"/>
-                    <TextBox Text="{Binding Domain.Registrar}"
+                    <!-- RIGHT COLUMN -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
+                        <TextBlock Text="Domain Registrar" FontSize="12"/>
+                        <TextBox Text="{Binding Domain.Registrar}"
                              Height="40" ToolTip="Enter Registrar Name"
                              Margin="0,6,0,14" 
                              Padding="10"  
                              Style="{StaticResource PlaceholderTextBoxStyle}" 
                              Tag="e.g. GoDaddy, Namecheap"/>
 
-                    <TextBlock Text="Amount($)" FontSize="12"/>
-                    <TextBox Text="{Binding Domain.Amount}"
+                        <TextBlock Text="Amount($)" FontSize="12"/>
+                        <TextBox Text="{Binding Domain.Amount}"
                              Height="40" 
                              ToolTip="Enter Amount" 
                              Margin="0,6,0,14" 
@@ -118,8 +120,8 @@
                              Style="{StaticResource PlaceholderTextBoxStyle}" 
                              Tag="Amount in USD"/>
 
-                    <TextBlock Text="Domain Nameservers1" FontSize="12"/>
-                    <TextBox Text="{Binding Domain.NameServer1}"
+                        <TextBlock Text="Domain Nameservers1" FontSize="12"/>
+                        <TextBox Text="{Binding Domain.NameServer1}"
                              Height="40" 
                              ToolTip="Enter DNS1" 
                              Margin="0,6,0,14" 
@@ -127,59 +129,93 @@
                              Style="{StaticResource PlaceholderTextBoxStyle}"
                              Tag="e.g. ns1.example.com"/>
 
-                    <StackPanel Margin="0,6,0,14">
-                        <TextBlock Text="Auto Renew" FontSize="12" Margin="0,0,0,6"/>
-                        <StackPanel Orientation="Horizontal" 
+                        <StackPanel Margin="0,6,0,14">
+                            <TextBlock Text="Auto Renew" FontSize="12" Margin="0,0,0,6"/>
+                            <StackPanel Orientation="Horizontal" 
                                     VerticalAlignment="Center" 
                                     Margin="0,2,0,0">
 
-                            <ToggleButton IsChecked="{Binding Domain.AutoRenew}"
+                                <ToggleButton IsChecked="{Binding Domain.AutoRenew}"
                                           Width="60" 
                                           Height="28">
-                                <ToggleButton.Template>
-                                    <ControlTemplate TargetType="ToggleButton">
-                                        <Grid>
-                                            <Border x:Name="Switch"
+                                    <ToggleButton.Template>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Grid>
+                                                <Border x:Name="Switch"
                                                     Background="LightGray"
                                                     CornerRadius="14"/>
-                                            <Ellipse x:Name="Knob"
+                                                <Ellipse x:Name="Knob"
                                                      Fill="White"
                                                      Width="24"
                                                      Height="24"
                                                      Margin="2"
                                                      HorizontalAlignment="Left"/>
-                                        </Grid>
+                                            </Grid>
 
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsChecked" Value="True">
-                                                <Setter TargetName="Switch" Property="Background" Value="#4F46E5"/>
-                                                <Setter TargetName="Knob" Property="HorizontalAlignment" Value="Right"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </ToggleButton.Template>
-                            </ToggleButton>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="Switch" Property="Background" Value="#4F46E5"/>
+                                                    <Setter TargetName="Knob" Property="HorizontalAlignment" Value="Right"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                </ToggleButton>
 
-                            <!--<TextBlock x:Name="txtAutoRenewStatus"
+                                <!--<TextBlock x:Name="txtAutoRenewStatus"
                                            FontSize="12"
                                            FontWeight="SemiBold"
                                            Margin="10,0,0,0"
                                            VerticalAlignment="Center"
                                            Foreground="Gray"
                                            Text="OFF"/>-->
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                </StackPanel>
 
-                <!-- SUBMIT BUTTON -->
-                <Button Grid.Row="5"
+                    <!-- SUBMIT BUTTON -->
+                    <Button Grid.Row="5"
                         Grid.ColumnSpan="2"
                         Content="SUBMIT"
                         Style="{StaticResource ElegantButtonStyle}"
                         Margin="0,15,0,0"
                         Cursor="Hand"
-                        Command="{Binding CreateCommand}"/>
-            </Grid>
-        </Border>
+                        Command="{Binding SubmitCommand}"/>
+                </Grid>
+            </Border>
+            
+            <!-- GRID OF ALL Domians -->
+            <DataGrid ItemsSource="{Binding DomainList}" AutoGenerateColumns="False"
+                      CanUserAddRows="False" Width="750" Height="250"
+                      RowHeight="30" HeadersVisibility="Column" Margin="0,0,0,20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                    <DataGridTextColumn Header="Domain Name" Binding="{Binding DomainName}" Width="*"/>
+                    <DataGridTextColumn Header="Registrar Name" Binding="{Binding Registrar}" Width="*"/>
+                    <DataGridTextColumn Header="DomainNameServer1" Binding="{Binding NameServer1}" Width="*"/>
+                    <DataGridTextColumn Header="DomainNameServer2" Binding="{Binding NameServer2}" Width="*"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="*"/>
+                    <DataGridTextColumn Header="Registred Date" Binding="{Binding RegisteredDate}" Width="*"/>
+                    <DataGridTextColumn Header="Renewal Date" Binding="{Binding RenewalDate}" Width="*"/>
+                    <DataGridTextColumn Header="Auto Renew" Binding="{Binding AutoRenew}" Width="*"/>
+
+                    <DataGridTemplateColumn Header="Actions" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="Edit"
+                                            Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" Margin="5,0"/>
+                                    <Button Content="Delete"
+                                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" Margin="5,0"
+                                            Background="#EF4444" Foreground="White"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </UserControl>

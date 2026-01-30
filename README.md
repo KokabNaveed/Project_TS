@@ -1,4 +1,4 @@
-# 🧩 MVVM WPF MySQL Management Application
+# 🧩 Subscription System 
 
 ## 🌟 Overview
 This project is a **WPF desktop application** built using the **MVVM (Model-View-ViewModel) design pattern** and connected to a **MySQL database**.
@@ -44,13 +44,15 @@ The dashboard helps users instantly understand system usage without navigating i
 - Live updates using `ObservableCollection`  
 - Integrated DataGrid with **Edit / Delete actions**
 
-### 💻 Domain Subscription Management
+### 🌐 Domain Subscription Management
 - Add Domain subscriptions  
 - Edit Domain details  
 - Delete Domain  
 - Date handling with DatePickers  
 - Live updates using `ObservableCollection`  
 - Integrated DataGrid with **Edit / Delete actions**
+
+--- 
 
 ### 🧠 Architecture & Design
 - Strict **MVVM pattern**

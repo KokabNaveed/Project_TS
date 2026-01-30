@@ -1,35 +1,83 @@
-# MVVM WPF MySQL Demo Application
+# 🧩 MVVM WPF MySQL Management Application
 
 ## 🌟 Overview
-This project is a **WPF desktop application** built using the **MVVM (Model-View-ViewModel) design pattern** and connected to a **MySQL database**.  
+This project is a **WPF desktop application** built using the **MVVM (Model-View-ViewModel) design pattern** and connected to a **MySQL database**.
 
-It demonstrates clean separation of concerns, modular code, and maintainable architecture, making it suitable for real-world desktop applications.
+It demonstrates how to build a **real-world, maintainable desktop application** with clean architecture, proper separation of concerns, and full **CRUD (Create, Read, Update, Delete)** functionality.
 
-**Key Highlights:**
-- Implements **MVVM architecture** (Model, View, ViewModel separation)  
-- Connects to **MySQL database** using Entity Framework Core  
-- Supports **CRUD operations** for managing data  
-- Uses **data binding**, **commands**, and **notifications**  
-- Easy to extend and maintain  
+The application manages:
+- **Email Users**
+- **Software Subscriptions**
+- **Domain Subscriptions**
 
----
-
-## 🚀 Features
-- **User Management**: Add, edit, and delete users  
-- **Email Subscription Form**: Stores user data securely  
-- **Dynamic UI Updates**: Reflects data changes automatically  
-- **MVVM Commands**: Implements `ICommand` for button actions  
-- **Database Integration**: Persistent storage with MySQL  
-- **Validation & Notifications**: Ensures proper data handling  
+with a modern WPF UI, command-based actions, and database persistence.
 
 ---
 
-## ⚙️ Prerequisites
-Before running the application, make sure you have installed:  
-- **Visual Studio 2022 or later** (with .NET Desktop Development workload)  
-- **.NET Framework 4.8**  
-- **MySQL Server** (via XAMPP or standalone installation)  
-- **MySQL Workbench** (optional, for database management)  
+## 🚀 Key Features
+
+### 👤 Email User Management
+- Add new email users  
+- Edit existing users  
+- Delete users with confirmation  
+- Prevent duplicate email registrations  
+- Real-time DataGrid refresh  
+
+### 💻 Software Subscription Management
+- Add software subscriptions  
+- Edit subscription details  
+- Delete subscriptions  
+- Plan types and categories via ComboBoxes  
+- Date handling with DatePickers  
+- Live updates using `ObservableCollection`  
+- Integrated DataGrid with **Edit / Delete actions**
+
+### 💻 Domain Subscription Management
+- Add Domain subscriptions  
+- Edit Domain details  
+- Delete Domain  
+- Date handling with DatePickers  
+- Live updates using `ObservableCollection`  
+- Integrated DataGrid with **Edit / Delete actions**
+
+### 🧠 Architecture & Design
+- Strict **MVVM pattern**
+- No business logic in Views
+- Reusable **RelayCommand**
+- Service layer for database operations
+- Property change notifications using `INotifyPropertyChanged`
+
+---
+
+## 🏗 Application Architecture
+
+```text
+Project│
+├── Models
+│   ├── EmailUser.cs
+│   └── SoftwareSubscription.cs
+│
+├── Views
+│   ├── EmailView.xaml
+│   └── SoftwareView.xaml
+│
+├── ViewModels
+│   ├── EmailUserViewModel.cs
+│   └── SoftwareViewModel.cs
+│
+├── Services
+│   ├── EmailUserService.cs
+│   └── SoftwareService.cs
+│
+├── Commands
+│   └── RelayCommand.cs
+│
+├── Data
+│   └── AppDbContext.cs
+│
+├── Styles
+│   └── Controls.xaml
+└── App.config
 
 ---
 
@@ -47,8 +95,8 @@ Before running the application, make sure you have installed:
 - **XAMPP** – Local development environment  
 
 **ORM / NuGet Packages**  
-- `Pomelo.EntityFrameworkCore.MySql` – EF Core provider for MySQL  
-- `Microsoft.EntityFrameworkCore.Tools` – EF Core tools for migrations and database updates  
+- `Pomelo.EntityFrameworkCore.MySql (9.0.0)` – EF Core provider for MySQL  
+- `Microsoft.EntityFrameworkCore.Tools (9.0.12)` – EF Core tools for migrations and database updates  
 
 **Tools & IDE**  
 - **Visual Studio 2022** – Development  
@@ -63,15 +111,3 @@ Before running the application, make sure you have installed:
 git clone <repository_url>
 cd <project_folder>
 ```
-
----
-
-## 🏗 Application Structure
-```bash
-MVVM WPF MySQL Demo
-│
-├── Model       # Database entity classes
-├── View        # XAML UI files
-├── ViewModel   # Logic, commands, and data binding
-├── Services    # Database operations
-└── App.config  # Connection string & config

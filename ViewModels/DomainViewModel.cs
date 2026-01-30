@@ -24,17 +24,24 @@ namespace Project.ViewModels
             }
         }
 
-        public ICommand SubmitCommand { get; }
+        public ICommand CreateCommand { get; }
 
         public DomainViewModel()
         {
             _domainService = new DomainService();
             Domain = new DomainSubscription();
-            SubmitCommand = new RelayCommand(o=>Submit());
+            CreateCommand = new RelayCommand(o=> CreateDomain());
         }
 
-        private void Submit()
+        private void CreateDomain()
         {
+            string DomainName = Domain.DomainName;
+            string DomainRegistrar = Domain.Registrar;
+            string DNS1 = Domain.NameServer1;
+            string DNS2 = Domain.NameServer2;
+            decimal amount = Domain.Amount;
+
+
             if (string.IsNullOrWhiteSpace(Domain.DomainName))
             {
                 MessageBox.Show("Domain name is required");
@@ -48,5 +55,6 @@ namespace Project.ViewModels
             Domain = new DomainSubscription();
 
         }
+
     }
 }

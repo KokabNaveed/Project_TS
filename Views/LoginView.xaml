@@ -1,0 +1,98 @@
+﻿<Window x:Class="Project.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Height="400"
+        Width="420"
+        ResizeMode="NoResize">
+
+    <Grid Background="#F9FAFB">
+        <Border Width="360"
+                Padding="24"
+                Background="White"
+                CornerRadius="14"
+                BorderBrush="#E5E7EB"
+                BorderThickness="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+
+            <StackPanel>
+
+                <!-- Title -->
+                <TextBlock Text="Admin Login"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="#111827"
+                           HorizontalAlignment="Center"/>
+
+                <TextBlock Text="Sign in to manage subscriptions"
+                           FontSize="13"
+                           Foreground="#6B7280"
+                           Margin="0,6,0,20"
+                           HorizontalAlignment="Center"/>
+
+                <!-- Email -->
+                <TextBlock Text="Email Address"
+                           FontSize="12"
+                           Foreground="#374151"
+                           Margin="0,0,0,4"/>
+
+                <TextBox Height="36"
+                         Padding="10"
+                         Text="{Binding Email}"
+                         Style="{StaticResource PlaceholderTextBoxStyle}"   
+                         Tag="e.g. user@example.com"/>
+
+                <!-- Password -->
+                <TextBlock Text="Password"
+                           FontSize="12"
+                           Foreground="#374151"
+                           Margin="0,14,0,0"/>
+
+                <!--<PasswordBox x:Name="pwd"
+                             Height="36"
+                             Padding="10"
+                             BorderBrush="#D1D5DB"
+                             BorderThickness="1"/>-->
+                <Grid>
+                    <Border Height="40"
+                            CornerRadius="8" 
+                            Background="White" 
+                            BorderBrush="#D1D5DB" 
+                            BorderThickness="1"   
+                            Margin="0,6,0,0">
+                        <PasswordBox x:Name="pwd"
+                                     Padding="10"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     VerticalContentAlignment="Center"
+                                     />
+                    </Border>
+                    <!-- Placeholder Text -->
+                    <TextBlock x:Name="PasswordPlaceholder"
+                               Text="Enter Password"
+                               Foreground="#9CA3AF"
+                               Height="15"
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"/>
+                </Grid>
+                <!-- Error -->
+                <TextBlock Text="{Binding ErrorMessage}"
+                           Foreground="#DC2626"
+                           FontSize="12"
+                           Margin="0,10,0,0"
+                           TextAlignment="Center"/>
+
+                <!-- Login Button -->
+                <Button Content="Login"
+                        Height="35"
+                        Margin="0,18,0,0"
+                        Style="{StaticResource ElegantButtonStyle}"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=pwd}"/>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -78,8 +78,7 @@ Project│
 ├── Styles
 │   └── Controls.xaml
 └── App.config
-
----
+```
 
 ## 🛠 Tech Stack
 
